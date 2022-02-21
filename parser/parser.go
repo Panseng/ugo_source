@@ -14,6 +14,9 @@ import (
 
 var DebugMode = false
 
+// ParseFile 解析源代码
+// @filename 文件名(含路径)
+// @src 源代码
 func ParseFile(filename, src string) (*ast.File, error) {
 	p := NewParser(filename, src)
 	return p.ParseFile()
@@ -42,15 +45,15 @@ func (p *Parser) ParseFile() (file *ast.File, err error) {
 		file, err = p.file, p.err
 	}()
 
-	tokens, comments := lexer.Lex(p.filename, p.src)
+	tokens, comments := lexer.Lex(p.filename, p.src) // 词法解析器，将所有语句的词一次读取完
 	for _, tok := range tokens {
 		if tok.Type == token.ERROR {
 			p.errorf(tok.Pos, "invalid token: %s", tok.Literal)
 		}
 	}
 
-	p.TokenStream = NewTokenStream(p.filename, p.src, tokens, comments)
-	p.parseFile()
+	p.TokenStream = NewTokenStream(p.filename, p.src, tokens, comments) // 输出 TokenStream 对象
+	p.parseFile() // 语法分析
 
 	return
 }

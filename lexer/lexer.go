@@ -6,6 +6,7 @@ import (
 	"github.com/wa-lang/ugo/token"
 )
 
+// Lex 词法解析器
 func Lex(name, input string) (tokens, comments []token.Token) {
 	l := NewLexer(name, input)
 	tokens = l.Tokens()
@@ -74,7 +75,7 @@ func (p *Lexer) errorf(format string, args ...interface{}) {
 	p.tokens = append(p.tokens, tok)
 	panic(tok)
 }
-
+// run 读取所有 token
 func (p *Lexer) run() (tokens []token.Token) {
 	defer func() {
 		tokens = p.tokens
@@ -93,7 +94,7 @@ func (p *Lexer) run() (tokens []token.Token) {
 		}
 
 		switch {
-		case r == '\n':
+		case r == '\n': // 换行符匹配
 			p.src.IgnoreToken()
 
 			if len(p.tokens) > 0 {

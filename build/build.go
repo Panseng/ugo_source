@@ -124,8 +124,9 @@ func (p *Context) Build(filename string, src interface{}, outfile string) (outpu
 	return p.build(filename, src, outfile, p.opt.GOOS, p.opt.GOARCH)
 }
 
+// build 编译入口
 func (p *Context) build(filename string, src interface{}, outfile, goos, goarch string) (output []byte, err error) {
-	code, err := p.readSource(filename, src)
+	code, err := p.readSource(filename, src) // 读取源代码
 	if err != nil {
 		return nil, err
 	}
@@ -198,6 +199,7 @@ func (p *Context) build(filename string, src interface{}, outfile, goos, goarch 
 	return data, err
 }
 
+// Run 编译器入口
 func (p *Context) Run(filename string, src interface{}) ([]byte, error) {
 	if p.opt.GOOS == "wasm" {
 		return nil, fmt.Errorf("donot support run wasm")
@@ -211,6 +213,7 @@ func (p *Context) Run(filename string, src interface{}) ([]byte, error) {
 		os.Remove(a_out)
 	}
 
+	// 编译
 	output, err := p.build(filename, src, a_out, runtime.GOOS, runtime.GOARCH)
 	if err != nil {
 		return output, err

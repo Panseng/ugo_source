@@ -11,8 +11,9 @@ import (
 	"github.com/wa-lang/ugo/build"
 )
 
+// 命令行，第一个参数输入文件地址
 func main() {
-	app := cli.NewApp()
+	app := cli.NewApp() // 命令行相关库
 	app.Name = "ugo"
 	app.Usage = "ugo is a tool for managing µGo source code."
 	app.Version = "0.0.1"
@@ -32,8 +33,8 @@ func main() {
 			os.Exit(1)
 		}
 
-		ctx := build.NewContext(build_Options(c))
-		data, err := ctx.Run(c.Args().First(), nil)
+		ctx := build.NewContext(build_Options(c)) // 获取运行环境相关参数
+		data, err := ctx.Run(c.Args().First(), nil) // 编译器入口，
 		if len(data) != 0 {
 			fmt.Print(string(data))
 		}

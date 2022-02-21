@@ -3,6 +3,17 @@ package ast
 import "github.com/wa-lang/ugo/token"
 
 var (
+	// 用在变量(特别是接口断言)
+	// 例如我们定义了一个接口(interface)：
+	//	type Foo interface {
+	//     Say()
+	//	}
+	// 然后定义了一个结构体(struct)
+	//	type Dog struct {
+	//	}
+	// 然后我们希望在代码中判断Dog这个struct是否实现了Foo这个interface
+	// var _ Foo = Dog{}
+	// 上面用来判断Dog是否实现了Foo, 用作类型断言，如果Dog没有实现Foo，则会报编译错误
 	_ Node = Expr(nil)
 	_ Node = Stmt(nil)
 
