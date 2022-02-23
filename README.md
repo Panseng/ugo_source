@@ -2,7 +2,8 @@
 本项目来源：[ugo](https://github.com/wa-lang/ugo) 
 - 代码结构简单，可用于初步了解编译器的实现。实现原理见：[ugo-compiler-book](https://github.com/wa-lang/ugo-compiler-book) 
 - 本项目对源代码进行了初步注释，因实现简洁，未作详细注释。
-- 如读者有 JavaScript 基础，可参考：[acorn](https://github.com/acornjs/acorn) 的实现
+- 如有 JavaScript 基础，可参考：[acorn](https://github.com/acornjs/acorn) 的实现
+  - acorn 用于生成 AST
 
 两者思路差异：
 - ugo 一次读取所有 token，然后进行语法解析，形成 AST
